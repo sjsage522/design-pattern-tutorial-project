@@ -3,12 +3,26 @@ package lib.java.scanner;
 import java.util.Scanner;
 
 public class SingleScanner {
-    private static Scanner instance;
 
+    // thread not safe
+    /*
+        Early Loading
+     */
+    private static final Scanner instance = new Scanner(System.in);
+    private SingleScanner() {}
     public static Scanner getInstance() {
-        if (instance == null) {
-            instance = new Scanner(System.in);
-        }
         return instance;
     }
+
+    /*
+        Lazy Loading
+     */
+//    private static Scanner instance;
+//    private SingleScanner() {}
+//    public static Scanner getInstance() {
+//        if (instance == null) {
+//            instance = new Scanner(System.in);
+//        }
+//        return instance;
+//    }
 }
