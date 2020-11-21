@@ -9,7 +9,7 @@ public class UserController {
     private final UserDAO dao = new UserDAO();
 
     public String getLoginUser(final String id, final String pw) {
-        if (dao.isExistUser(id, pw)) {
+        if (dao.isExistUserByUserId(id, pw)) {
             return id;
         }
         return null;

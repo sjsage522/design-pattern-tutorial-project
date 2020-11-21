@@ -98,8 +98,8 @@ public class UserDAO extends DBConnection {
         return true;
     }
 
-    public void saveMoney(final String userId, final int payMoney) {
-        String userRankId = getRankId(userId);
+    public void saveMoneyByUserId(final String userId, final int payMoney) {
+        String userRankId = getRankIdByUserId(userId);
         RankFactory rankFactory = new RankFactory();
 
         Rank currentUserRank = rankFactory.getRank(userRankId);
@@ -121,7 +121,7 @@ public class UserDAO extends DBConnection {
         }
     }
 
-    public int getSavedMoney(final String userId) {
+    public int getSavedMoneyByUserId(final String userId) {
         String query = "SELECT saved_money FROM customer WHERE id = ?";
         int savedMoney = -1;
 
@@ -148,7 +148,7 @@ public class UserDAO extends DBConnection {
     }
 
     public boolean isUpdateUserRankId(final String userId, final int savedMoney) {
-        String currentRankId = getRankId(userId);
+        String currentRankId = getRankIdByUserId(userId);
 
         String rankId = "None";
 
@@ -187,7 +187,7 @@ public class UserDAO extends DBConnection {
         }
     }
 
-    public String getRankId(final String userId) {
+    public String getRankIdByUserId(final String userId) {
         String query = "SELECT rankid FROM customer WHERE id = ?";
         String currentRankId = "None";
 
@@ -209,7 +209,7 @@ public class UserDAO extends DBConnection {
     }
 
     //login
-    public boolean isExistUser(final String inputId, final String inputPw) {
+    public boolean isExistUserByUserId(final String inputId, final String inputPw) {
         boolean isMatch = false;
 
         String query = "SELECT * FROM customer WHERE id=? AND pw=?";

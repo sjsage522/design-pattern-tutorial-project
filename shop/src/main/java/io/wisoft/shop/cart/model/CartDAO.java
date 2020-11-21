@@ -147,7 +147,7 @@ public class CartDAO extends DBConnection {
                     sum += totalPrice;
 
                     double discountRate =
-                            rankFactory.getRank(userDAO.getRankId(userId)).getDiscountRate();
+                            rankFactory.getRank(userDAO.getRankIdByUserId(userId)).getDiscountRate();
                     sum = (int) (sum * (1 - (discountRate / 100)));
 
                     updateProductCount(productId, totalCount);
@@ -155,13 +155,13 @@ public class CartDAO extends DBConnection {
 
                 if (isClearCart(cartDTO)) {
                     System.out.println("총 결제 금액 : " + sum + "원.");
-                    userDAO.saveMoney(userId, sum);
+                    userDAO.saveMoneyByUserId(userId, sum);
                 } else {
                     System.out.println("장바구니가 비었습니다.");
                     System.out.println("총 결제 금액 0 원.");
                 }
 
-                int currentUserSavedMoney = userDAO.getSavedMoney(userId);
+                int currentUserSavedMoney = userDAO.getSavedMoneyByUserId(userId);
                 if (userDAO.isUpdateUserRankId(userId, currentUserSavedMoney)) {
                     System.out.println("등급이 올라갔습니다.");
                 }
